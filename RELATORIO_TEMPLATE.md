@@ -13,19 +13,19 @@ strace -e write ./ex1b_write
 ### Análise
 
 **1. Quantas syscalls write() cada programa gerou?**
-- ex1a_printf: _____ syscalls
-- ex1b_write: _____ syscalls
+- ex1a_printf: 8 syscalls
+- ex1b_write: 7 syscalls
 
 **2. Por que há diferença entre printf() e write()?**
 
 ```
-[Sua análise aqui]
+    O write() escreve direto no arquivo, cada chamada sua vira exatamente uma syscall (sem buffer intermediário). Já o printf(), usa um buffer para realizar a saída, o que causa de um "\n" caso esteja solitario (basicamente como se fosse 2 enters seguidos), causar uma syscall a mais.
 ```
 
 **3. Qual implementação você acha que é mais eficiente? Por quê?**
 
 ```
-[Sua análise aqui]
+    Depende do tamanho do arquivo, caso o arquivo esteja sem \n solitarios, o printf() vai ser melhor pois pode agrupar dados, agora para arquivos maiores, o write() sempre vai ter a mesma quantidade de chamadas que o arquivo ter, coisa que o printf() pode causar mais chamadas. 
 ```
 
 ---
@@ -33,8 +33,8 @@ strace -e write ./ex1b_write
 ## Exercício 2 - Leitura de Arquivo
 
 ### Resultados da execução:
-- File descriptor: _____
-- Bytes lidos: _____
+- File descriptor: 3
+- Bytes lidos: 127
 
 ### Comando strace:
 ```bash
@@ -46,7 +46,11 @@ strace -e open,read,close ./ex2_leitura
 **1. Por que o file descriptor não foi 0, 1 ou 2?**
 
 ```
-[Sua análise aqui]
+    0:
+
+    1:
+
+    2:
 ```
 
 **2. Como você sabe que o arquivo foi lido completamente?**
